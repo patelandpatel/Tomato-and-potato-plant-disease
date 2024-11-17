@@ -1,4 +1,4 @@
-# Tomato and Potato Plant Disease Detection 🌱
+# 🌱 Tomato and Potato Plant Disease Detection 🌱
 
 A deep learning project to detect and classify diseases in tomato and potato plants using image recognition techniques. This repository contains code, datasets, and model configurations for training and deploying a disease detection model aimed at assisting farmers and agricultural researchers.
 

@@ -1,0 +1,102 @@
+# Configuration parameters for Student Performance Predictor
+
+# Base paths
+base:
+  project_name: "student_performance_predictor"
+  random_state: 42
+
+# Data paths
+data_paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  schema_dir: "config"
+
+# Model paths
+model_paths:
+  models_dir: "models"
+  
+# Logging configuration
+logs:
+  logs_dir: "logs"
+  log_file: "app.log"
+  log_level: "INFO"
+
+# Reports
+reports:
+  reports_dir: "reports"
+
+# Data ingestion parameters
+data_ingestion:
+  test_size: 0.2
+  random_state: 42
+  # raw_data_url: "https://example.com/student_data.csv"  # Uncomment if fetching from URL
+
+# Data validation parameters
+data_validation:
+  required_columns: 
+    - "gender"
+    - "race_ethnicity"
+    - "parental_level_of_education"
+    - "lunch"
+    - "test_preparation_course"
+    - "reading_score"
+    - "writing_score"
+    - "math_score"
+  target_column: "math_score"
+
+# Data preprocessing parameters
+data_preprocessing:
+  numerical_columns:
+    - "reading_score"
+    - "writing_score"
+  categorical_columns:
+    - "gender"
+    - "race_ethnicity"
+    - "parental_level_of_education"
+    - "lunch"
+    - "test_preparation_course"
+  target_column: "math_score"
+  # drop_columns: []  # Optional columns to drop
+
+# Model trainer parameters
+model_trainer:
+  target_column: "math_score"
+  r2_threshold: 0.6
+  
+  # Model hyperparameters
+  models:
+    random_forest:
+      n_estimators: [8, 16, 32, 64, 128, 256]
+      criterion: ["squared_error", "absolute_error", "poisson"]
+      max_features: ["sqrt", "log2", null]
+      
+    gradient_boosting:
+      learning_rate: [0.1, 0.01, 0.05, 0.001]
+      n_estimators: [8, 16, 32, 64, 128, 256]
+      subsample: [0.6, 0.7, 0.75, 0.8, 0.85, 0.9]
+      
+    xgboost:
+      learning_rate: [0.1, 0.01, 0.05, 0.001]
+      n_estimators: [8, 16, 32, 64, 128, 256]
+      max_depth: [3, 4, 5, 6]
+      
+    catboost:
+      depth: [6, 8, 10]
+      learning_rate: [0.01, 0.05, 0.1]
+      iterations: [30, 50, 100]
+      
+    linear_regression: {}
+    
+    decision_tree:
+      criterion: ["squared_error", "friedman_mse", "absolute_error", "poisson"]
+      max_depth: [None, 5, 10, 15, 20]
+      
+    adaboost:
+      learning_rate: [0.1, 0.01, 0.5, 0.001]
+      n_estimators: [8, 16, 32, 64, 128, 256]
+
+# Web application parameters
+web_app:
+  host: "0.0.0.0"
+  port: 5000
+  debug: true

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result - Student Performance Predictor{% endblock %}
+
+{% block extra_css %}
+<style>
+    .score-display {
+        font-size: 5rem;
+        font-weight: bold;
+    }
+    
+    .progress {
+        height: 30px;
+    }
+    
+    .progress-bar {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h2 class="my-2">Prediction Result</h2>
+            </div>
+            <div class="card-body text-center py-5">
+                <h3 class="mb-4">Predicted Math Score</h3>
+                
+                <div class="score-display text-primary mb-4">{{ prediction }}</div>
+                
+                <div class="progress mb-4">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: {{ prediction }}%;" 
+                         aria-valuenow="{{ prediction }}" aria-valuemin="0" aria-valuemax="100">
+                        {{ prediction }}%
+                    </div>
+                </div>
+                
+                <div class="alert alert-info" role="alert">
+                    <p class="mb-0">
+                        <strong>Note:</strong> This prediction is based on the input features provided. The actual score may vary based on other factors not considered in this model.
+                    </p>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('predict_datapoint') }}" class="btn btn-primary me-2">Make Another Prediction</a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h3 class="h4 mb-3">Score Interpretation</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h4 class="h5">Low Score (0-50)</h4>
+                                <p class="mb-0">May indicate need for additional support in math concepts and problem-solving strategies.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h4 class="h5">Medium Score (51-75)</h4>
+                                <p class="mb-0">Shows solid understanding of core concepts with room for improvement in advanced topics.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-light mb-3">
+                            <div class="card-body">
+                                <h4 class="h5">High Score (76-100)</h4>
+                                <p class="mb-0">Demonstrates strong mathematical proficiency and readiness for advanced coursework.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Add any result-specific JavaScript here
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation for score display
+        const scoreElement = document.querySelector('.score-display');
+        const finalScore = {{ prediction }};
+        let currentScore = 0;
+        const duration = 1500; // ms
+        const steps = 60;
+        const increment = finalScore / steps;
+        const interval = duration / steps;
+        
+        const animation = setInterval(() => {
+            currentScore += increment;
+            if (currentScore >= finalScore) {
+                currentScore = finalScore;
+                clearInterval(animation);
+            }
+            scoreElement.textContent = currentScore.toFixed(2);
+        }, interval);
+    });
+</script>
+{% endblock %}

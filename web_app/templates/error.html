@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Error - Student Performance Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-header bg-danger text-white">
+                <h2 class="my-2">Error</h2>
+            </div>
+            <div class="card-body text-center py-5">
+                <div class="mb-4">
+                    <i class="fas fa-exclamation-triangle text-danger" style="font-size: 5rem;"></i>
+                </div>
+                
+                <h3 class="mb-4">Something went wrong</h3>
+                
+                <div class="alert alert-danger" role="alert">
+                    <p class="mb-0">{{ error }}</p>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('predict_datapoint') }}" class="btn btn-primary me-2">Try Again</a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

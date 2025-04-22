@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Student Performance Predictor{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow">
+            <div class="card-body text-center">
+                <h1 class="card-title mb-4">Student Performance Predictor</h1>
+                <p class="card-text lead">
+                    Welcome to the Student Performance Predictor, an advanced machine learning tool designed to predict math scores based on various student attributes.
+                </p>
+                <hr>
+                <h2 class="h4 my-4">How It Works</h2>
+                <div class="row text-start mb-4">
+                    <div class="col-md-4">
+                        <div class="card h-100 bg-light">
+                            <div class="card-body">
+                                <h3 class="h5">Input Features</h3>
+                                <p>Provide student information including demographics, parental education, lunch type, test preparation, and other test scores.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 bg-light">
+                            <div class="card-body">
+                                <h3 class="h5">AI Processing</h3>
+                                <p>Our machine learning model analyzes the data using algorithms trained on a dataset of student performance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 bg-light">
+                            <div class="card-body">
+                                <h3 class="h5">Prediction</h3>
+                                <p>Receive an accurate prediction of the student's math score based on the provided information.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{{ url_for('predict_datapoint') }}" class="btn btn-primary btn-lg">Make a Prediction</a>
+            </div>
+        </div>
+        
+        <div class="card shadow mt-4">
+            <div class="card-body">
+                <h2 class="h4 mb-3">About This Project</h2>
+                <p>
+                    This project uses machine learning algorithms to predict student math scores based on various factors. It demonstrates how educational outcomes can be influenced by different variables and helps identify areas where support might be needed.
+                </p>
+                <p>
+                    The model was trained on a dataset containing information about students' demographics, family background, and educational experiences. It achieved a high accuracy rate in predicting math scores based on these factors.
+                </p>
+                <p>
+                    <strong>Note:</strong> This tool is for educational purposes only and should not be used as the sole basis for any important decisions regarding a student's education.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
